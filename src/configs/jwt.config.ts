@@ -28,6 +28,9 @@ export const JwtMiddlwareConfig = expressjwt({
     } 
     // Check if the token is present in the query parameters
     else if (req.query && req.query.token) {
+      req.body.jwtToken = req.query.token;
+      // Decode the token and store the payload in the request body
+      req.body.payload = decode(req.body.jwtToken);
       return req.query.token;
     }
     // Throw an error if the token is not found in either location

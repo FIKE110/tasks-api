@@ -1,5 +1,6 @@
 import { db } from "../database";
 import { User } from "../models/User";
+import { broadcast } from "../websocket";
 
 /**
  * Creates a new user in the database.
@@ -8,7 +9,9 @@ import { User } from "../models/User";
  */
 export async function createUser(user: User) {
    await db.insertInto('users').values(user).executeTakeFirst();
-   return await findUserByUsername(user.username);
+   const createUser=await findUserByUsername(user.username);
+   broadcast(JSON.stringify(createUser))
+   return createUser
 }
 
 /**

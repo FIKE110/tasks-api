@@ -1,6 +1,7 @@
 import { getMySQLTimestamp } from "../configs/sql.config";
 import { db } from "../database";
 import { Task } from "../models/Task";
+import { broadcast, wss } from "../websocket";
 
 /**
  * Retrieves all tasks associated with a user from the database.
@@ -12,7 +13,6 @@ export const getAllTasks = async (user_id: number) => {
     .selectAll()
     .where('user_id', '=', user_id)
     .execute();
-
   return result;
 };
 
@@ -41,7 +41,7 @@ export const createTask = async (task: Task | Task[]) => {
   const result = await db.insertInto('tasks')
     .values(task)
     .execute();
-  
+  if(result) broadcast(JSON.stringify(task))
   return result;
 };
 

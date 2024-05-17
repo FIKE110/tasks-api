@@ -42,7 +42,7 @@ export async function userLoginController(req: Request, res: Response) {
                     email
                 },
                 message: 'Login successful',
-                accessToken: sign({
+                access_token: sign({
                     id: id,
                     email: email
                 })

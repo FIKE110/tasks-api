@@ -5,9 +5,14 @@ import cors from 'cors'; // Middleware to enable Cross-Origin Resource Sharing
 import { JwtMiddlwareConfig } from './src/configs/jwt.config'; // Custom JWT middleware configuration
 import { Routers } from './src/routes/Router'; // Importing the main router module
 import morgan from 'morgan'; // HTTP request logger middleware
+import expressWs from 'express-ws';
+import { webSocketService } from './src/websocket';
 
 // Create an Express application instance
 const app = express();
+const { app: wsApp, getWss } = expressWs(app);
+
+webSocketService(app)
 
 // Retrieve the port number from environment variables
 const port = process.env.PORT;
