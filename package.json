@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx --watch index.ts",
     "start":"node dist/index.js",
-    "build":"npx tsx",
+    "build":"npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
