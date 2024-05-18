@@ -1,5 +1,6 @@
 import { Response, Request, NextFunction } from "express";
 import { UserSchema } from "../models/User";
+import { hashService } from "../services/hash";
 
 /**
  * Middleware to validate user signup data against the UserSchema.
@@ -12,6 +13,7 @@ export function userSignupMiddleware(req: Request, res: Response, next: NextFunc
     const user = req.body;
     try {
         UserSchema.parse(user);
+        req.body.password=hashService(user.password)
         next();
     } catch (e) {
         // Respond with error status code and message if user data is invalid
@@ -29,6 +31,7 @@ export function userSignupMiddleware(req: Request, res: Response, next: NextFunc
 export function userLoginMiddleware(req: Request, res: Response, next: NextFunction) {
     const { username, password } = req.body;
     if (username && password) {
+        req.body.password=hashService(password)
         next();
     } else {
         // Respond with error status code and message if username or password is missing

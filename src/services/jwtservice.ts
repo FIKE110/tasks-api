@@ -9,7 +9,7 @@ import 'dotenv/config';
 export function sign(payload: any) {
     return jwt.sign(payload, process.env.JWTSECRETKEY as string, {
         algorithm: 'HS256',
-        expiresIn: 3600 * 10 // Expires in 10 hours
+        expiresIn:process.env.TOKENDURATION // Expires in 10 hours
     });
 }
 

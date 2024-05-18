@@ -1,15 +1,9 @@
 import { Database } from './types' // this is the Database interface we defined earlier
 import { createPool } from 'mysql2' // do not use 'mysql2/promises'!
 import { Kysely, MysqlDialect } from 'kysely'
+import 'dotenv/config'
 
-const pool=createPool({
-    database: 'tasksApi',
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    port: 3306,
-    connectionLimit: 10,
-})
+const pool=createPool(process.env.DBURI as string)
 
 pool.on('connection',()=>{
     console.log('Connection with db estabished')

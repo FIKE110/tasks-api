@@ -16,8 +16,8 @@ export type User = {
  */
 export const UserSchema = z.object({
     id: z.number().optional(), // Validates id as an optional number.
-    username: z.string(), // Validates username as a non-empty string.
+    username: z.string().min(3), // Validates username as a non-empty string.
     email: z.string().email(), // Validates email as a valid email address string.
-    password: z.string(), // Validates password as a non-empty string.
+    password: z.string().min(4), // Validates password as a non-empty string.
     created_at: z.union([z.date(), z.string()]).optional() // Validates created_at as an optional Date object or string.
 });
