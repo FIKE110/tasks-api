@@ -6,7 +6,7 @@ This project implements a RESTful API for a simple task management system, provi
 
 - **User Authentication**: Implemented using JWT tokens for secure access to API endpoints.
 - **CRUD Operations**: Endpoints provided for creating, reading, updating, and deleting tasks.
-- **Data Persistence**: Task data is stored in a [database of your choice].
+- **Data Persistence**: Task data is stored in a Mysql
 - **Input Validation**: Input data is validated to ensure data integrity and security.
 - **Real-time Streaming**: Real-time updates are streamed through WebSocket.
 
@@ -15,7 +15,8 @@ This project implements a RESTful API for a simple task management system, provi
 - Node.js
 - Express.js
 - JWT (JSON Web Tokens)
-- [Database of your choice]
+- Mysql
+- kysely (Query builder)
 - WebSocket (for real-time streaming)
 
 ## Project Structure
