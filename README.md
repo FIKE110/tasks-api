@@ -124,7 +124,7 @@ This API provides endpoints for managing tasks and handling user authentication.
    - **Authorization:** No token required
 
 3. **WebSocket Route**
-    - Use /ws to be updated on active creation of data to the database
+    - Use /ws [to be updated on active creation of data to the database]
 
 
 ## How to Use Bearer Token
