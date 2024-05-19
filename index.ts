@@ -15,7 +15,7 @@ const { app: wsApp, getWss } = expressWs(app);
 webSocketService(app)
 
 // Retrieve the port number from environment variables
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 // Middleware to parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded({ extended: true }));

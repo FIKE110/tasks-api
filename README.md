@@ -37,19 +37,19 @@ This project implements a RESTful API for a simple task management system, provi
 
 1. **Clone the Repository**: 
     ```
-    git clone https://github.com/your-username/task-management-api.git
+    git clone https://github.com/FIKE110/tasks-api.git
     ```
 2. **Install Dependencies**: 
     ```
     cd task-management-api
        npm install
     ```
-3. **Set Up Database**: Configure and set up the database connection in the `database/` directory.
+3. **Set Up Database**: Configure and set up the database connection in the `database.ts`.
 4. **Start the Server**: 
     ```
     npm start
     ```
-5. **Access the API**: The API will be accessible at `http://localhost:3000/api`.
+5. **Access the API**: The API will be accessible at `http://localhost:3000/tasks`.
 
 
 ## API Documentation
@@ -62,49 +62,78 @@ This API provides endpoints for managing tasks and handling user authentication.
 
 ## Task Routes
 
-### Retrieve All Tasks
-- **Method:** `GET`
-- **Endpoint:** `/`
-- **Middleware:** `getAllTasksMiddleware`
-- **Controller:** `getAllTasksController`
+## All Task Route Uses Bearer Token for Authoratization e.g
+- header{
+    Authoraization:Bearer [jwt gotten from login (http://localhost/users/login)]
+} 
+# Task Management and User Authentication API
 
-### Retrieve a Task by ID
-- **Method:** `GET`
-- **Endpoint:** `/:id`
-- **Middleware:** `getTaskByIdMiddleware`
-- **Controller:** `getTaskByIdController`
+This API provides endpoints for managing tasks and handling user authentication. JWT (JSON Web Tokens) are used for secure authentication. Below are the routes available in the API along with their respective HTTP methods, endpoints, middlewares, controllers, and authorization requirements.
 
-### Create a New Task
-- **Method:** `POST`
-- **Endpoint:** `/`
-- **Middleware:** `createTaskMiddleware`
-- **Controller:** `createTaskController`
+## Task Routes
 
-### Update a Task by ID
-- **Method:** `PUT`
-- **Endpoint:** `/update/:id`
-- **Middleware:** `updateTaskMiddleware`
-- **Controller:** `updateTaskController`
+1. **Retrieve All Tasks**
+   - **Method:** `GET`
+   - **Endpoint:** `tasks/`
+   - **Middleware:** `authMiddleware`, `getAllTasksMiddleware`
+   - **Controller:** `getAllTasksController`
+   - **Authorization:** Bearer Token required in the `Authorization` header
 
-### Delete a Task by ID
-- **Method:** `DELETE`
-- **Endpoint:** `/delete/:id`
-- **Middleware:** `deleteTaskMiddleware`
-- **Controller:** `deleteTaskController`
+2. **Retrieve a Task by ID**
+   - **Method:** `GET`
+   - **Endpoint:** `tasks/:id`
+   - **Middleware:** `authMiddleware`, `getTaskByIdMiddleware`
+   - **Controller:** `getTaskByIdController`
+   - **Authorization:** Bearer Token required in the `Authorization` header
+
+3. **Create a New Task**
+   - **Method:** `POST`
+   - **Endpoint:** `tasks/`
+   - **Middleware:** `authMiddleware`, `createTaskMiddleware`
+   - **Controller:** `createTaskController`
+   - **Authorization:** Bearer Token required in the `Authorization` header
+
+4. **Update a Task by ID**
+   - **Method:** `PUT`
+   - **Endpoint:** `tasks/update/:id`
+   - **Middleware:** `authMiddleware`, `updateTaskMiddleware`
+   - **Controller:** `updateTaskController`
+   - **Authorization:** Bearer Token required in the `Authorization` header
+
+5. **Delete a Task by ID**
+   - **Method:** `DELETE`
+   - **Endpoint:** `tasks/delete/:id`
+   - **Middleware:** `authMiddleware`, `deleteTaskMiddleware`
+   - **Controller:** `deleteTaskController`
+   - **Authorization:** Bearer Token required in the `Authorization` header
 
 ## User Routes
 
-### User Login
-- **Method:** `POST`
-- **Endpoint:** `/login`
-- **Middleware:** `userLoginMiddleware`
-- **Controller:** `userLoginController`
+1. **User Login**
+   - **Method:** `POST`
+   - **Endpoint:** `users/login`
+   - **Middleware:** `userLoginMiddleware`
+   - **Controller:** `userLoginController`
+   - **Authorization:** No token required
 
-### User Registration
-- **Method:** `POST`
-- **Endpoint:** `/register`
-- **Middleware:** `userSignupMiddleware`
-- **Controller:** `userSignupController`
+2. **User Registration**
+   - **Method:** `POST`
+   - **Endpoint:** `users/register`
+   - **Middleware:** `userSignupMiddleware`
+   - **Controller:** `userSignupController`
+   - **Authorization:** No token required
+
+## How to Use Bearer Token
+
+For routes that require authorization, you must include the Bearer Token in the `Authorization` header of your HTTP request. Here's an example of how to include the Bearer Token:
+
+### Example Request with Bearer Token
+
+```http
+GET /tasks HTTP/1.1
+Host: your-api-domain.com
+Authorization: Bearer your_jwt_token
+
 
 ## Middleware
 
@@ -131,6 +160,21 @@ This API provides endpoints for managing tasks and handling user authentication.
 ### User Controllers
 - **userLoginController:** Controller for handling user login.
 - **userSignupController:** Controller for handling user registration.
+
+### env variables to set
+
+- PORT
+- JWTSECRETKEY
+- WEBSOCKETPORT=4000
+- DBURI
+- FRONTSALT
+- BACKSALT
+- TOKENDURATION
+- DBNAME
+- DBHOST
+- DBUSER
+- DBPASSWORD
+- DBPORT
 
 
 
