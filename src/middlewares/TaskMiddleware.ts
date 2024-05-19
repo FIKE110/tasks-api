@@ -51,7 +51,7 @@ export async function createTaskMiddleware(req: Request, res: Response, next: Ne
         req.body.task = newTask;
         next();
     } else {
-        res.json({ message: 'Malformed request' });
+        res.status(400).json({ message: 'Malformed request' });
     }
 };
 
@@ -72,7 +72,7 @@ export async function updateTaskMiddleware(req: Request, res: Response, next: Ne
         }
         res.json({ message: "status is either pending or completed" });
     } else {
-        res.json({ message: 'Malformed request' });
+        res.status(400).json({ message: 'Malformed request' });
     }
 };
 
@@ -89,6 +89,6 @@ export async function deleteTaskMiddleware(req: Request, res: Response, next: Ne
     if (id && user_id) {
         next();
     } else {
-        res.json({ message: 'Invalid parameters' });
+        res.status(400).json({ message: 'Invalid parameters' });
     }
 };

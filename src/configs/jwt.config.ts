@@ -1,6 +1,7 @@
 import { expressjwt } from "express-jwt";
 import { Request, Response } from "express";
 import { decode, verify } from "../services/jwtservice";
+import 'dotenv/config'
 
 // Configuration for JWT middleware
 export const JwtMiddlwareConfig = expressjwt({
@@ -34,16 +35,16 @@ export const JwtMiddlwareConfig = expressjwt({
       return req.query.token;
     }
     // Throw an error if the token is not found in either location
-    throw 'Not Authorized: Bearer token not found';
+    return null;
   },
   
   // Function to handle expired tokens
   onExpired: () => {
-    throw 'Not Authorized: Expired Token';
+    //return 'Not Authorized : Expired Token';
   },
   
   // Maximum age of the token in seconds (24 hours)
-  maxAge: 3600 * 24
+  maxAge:process.env.TOKENDURATION
 }).unless({ 
   // Paths that do not require authentication
   path: ['/users/login', '/users/register'] 
