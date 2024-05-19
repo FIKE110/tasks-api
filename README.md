@@ -123,6 +123,10 @@ This API provides endpoints for managing tasks and handling user authentication.
    - **Controller:** `userSignupController`
    - **Authorization:** No token required
 
+3. **WebSocket Route**
+    - Use /ws to be updated on active creation of data to the database
+
+
 ## How to Use Bearer Token
 
 For routes that require authorization, you must include the Bearer Token in the `Authorization` header of your HTTP request. Here's an example of how to include the Bearer Token:
